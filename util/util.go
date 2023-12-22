@@ -35,13 +35,14 @@ func WriteToCSV(users []types.User) {
 	for _, row := range users {
 		s := []string{
 			row.Email,
-			row.Login,
 			row.Name,
+			row.Login,
 		}
 		writer.Write(s)
 	}
 }
 
+// TODO implement/document client secret parsing, Write to Docs mode
 func WriteToGoogleDocs(sheetFlag *string, allUsers []types.User) {
 	data, err := os.ReadFile("client-secret.json")
 	if err != nil {
