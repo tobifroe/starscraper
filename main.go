@@ -90,5 +90,7 @@ func main() {
 
 		util.WriteToCSV(allUsers)
 
+	} else {
+		fmt.Println("No Github token supplied. Either pass the -token flag, set up a .env file or set the GH_TOKEN environment variable.")
 	}
 }
