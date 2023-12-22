@@ -2,21 +2,16 @@ package main
 
 import (
 	"context"
-	"encoding/csv"
 	"flag"
 	"fmt"
 	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/shurcooL/githubv4"
+	"github.com/tobifroe/starscraper/types"
+	"github.com/tobifroe/starscraper/util"
 	"golang.org/x/oauth2"
 )
-
-type user struct {
-	Email string
-	Name  string
-	Login string
-}
 
 var query struct {
 	Repository struct {
@@ -70,7 +65,7 @@ func main() {
 
 		client := githubv4.NewClient(tc)
 
-		var allUsers []user
+		var allUsers []types.User
 		for {
 			err := client.Query(ctx, &query, variables)
 			if err != nil {
@@ -79,7 +74,11 @@ func main() {
 			}
 			for _, v := range query.Repository.Stargazers.Edges {
 				if v.Node.Email != "" {
-					allUsers = append(allUsers, user{v.Node.Email, v.Node.Name, v.Node.Login})
+					allUsers = append(allUsers, types.User{
+						Email: v.Node.Email,
+						Name:  v.Node.Name,
+						Login: v.Node.Login,
+					})
 				}
 				fmt.Printf("%s (%s) - %s\n", v.Node.Name, v.Node.Login, v.Node.Email)
 			}
@@ -89,29 +88,7 @@ func main() {
 			variables["cursor"] = githubv4.NewString(query.Repository.Stargazers.PageInfo.EndCursor)
 		}
 
-		WriteToCSV(allUsers)
+		util.WriteToCSV(allUsers)
 
-	}
-}
-
-func WriteToCSV(users []user) {
-	file, err := os.Create("output.csv")
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	writer := csv.NewWriter(file)
-	defer writer.Flush()
-
-	headers := []string{"email", "name", "login"}
-	writer.Write(headers)
-	for _, row := range users {
-		s := []string{
-			row.Email,
-			row.Login,
-			row.Name,
-		}
-		writer.Write(s)
 	}
 }
