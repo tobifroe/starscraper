@@ -80,7 +80,9 @@ func main() {
 						Login: v.Node.Login,
 					})
 				}
-				fmt.Printf("%s (%s) - %s\n", v.Node.Name, v.Node.Login, v.Node.Email)
+				if v.Node.Email != "" {
+					fmt.Printf("%s (%s) - %s\n", v.Node.Name, v.Node.Login, v.Node.Email)
+				}
 			}
 			if !query.Repository.Stargazers.PageInfo.HasNextPage {
 				break
