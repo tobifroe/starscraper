@@ -34,7 +34,12 @@ func init() {
 	scrapeCmd.Flags().String("output", "output.csv", "Output file")
 	scrapeCmd.Flags().BoolP("verbose", "v", false, "Verbose output")
 
-	scrapeCmd.MarkFlagRequired("repo")
-	scrapeCmd.MarkFlagRequired("owner")
-
+	err := scrapeCmd.MarkFlagRequired("repo")
+	if err != nil {
+		panic(err)
+	}
+	err = scrapeCmd.MarkFlagRequired("owner")
+	if err != nil {
+		panic(err)
+	}
 }

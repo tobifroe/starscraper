@@ -46,7 +46,10 @@ func TestWriteToCSV(t *testing.T) {
 	}
 
 	// Validate CSV format
-	file.Seek(0, 0)
+	_, err = file.Seek(0, 0)
+	if err != nil {
+		panic(err)
+	}
 	var buf bytes.Buffer
 	_, _ = buf.ReadFrom(file)
 	csvContent := buf.String()
