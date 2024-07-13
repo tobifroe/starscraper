@@ -19,7 +19,7 @@ func TestWriteToCSV(t *testing.T) {
 	}
 
 	// Execute the function
-	WriteToCSV(users)
+	WriteToCSV(users, "output.csv")
 
 	// Read the written file
 	file, err := os.Open("output.csv")

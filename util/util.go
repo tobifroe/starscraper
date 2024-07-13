@@ -16,8 +16,8 @@ func Contains(s []string, e string) bool {
 	return false
 }
 
-func WriteToCSV(users []types.User) {
-	file, err := os.Create("output.csv")
+func WriteToCSV(users []types.User, output string) {
+	file, err := os.Create(output)
 	if err != nil {
 		panic(err)
 	}

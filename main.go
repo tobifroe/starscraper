@@ -5,7 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"time"
 
+	"github.com/briandowns/spinner"
 	"github.com/joho/godotenv"
 	"github.com/shurcooL/githubv4"
 	"github.com/tobifroe/starscraper/types"
@@ -39,6 +41,8 @@ func main() {
 	tokenFlag := flag.String("token", "", "Github Token")
 	repoFlag := flag.String("repo", "", "Github Repo")
 	ownerFlag := flag.String("owner", "", "Github Repo Owner")
+	outputFlag := flag.String("output", "output.csv", "Output file name")
+	debugFlag := flag.Bool("debug", false, "Verbose output for debugging")
 	flag.Parse()
 
 	err := godotenv.Load()
@@ -56,6 +60,16 @@ func main() {
 		*tokenFlag = os.Getenv("GH_TOKEN")
 	}
 
+	if *repoFlag == "" {
+		fmt.Println("Please specify a repository.")
+		return
+	}
+
+	if *ownerFlag == "" {
+		fmt.Println("Please specify a repository owner.")
+		return
+	}
+
 	if *tokenFlag != "" {
 		ctx := context.Background()
 		ts := oauth2.StaticTokenSource(
@@ -64,6 +78,10 @@ func main() {
 		tc := oauth2.NewClient(ctx, ts)
 
 		client := githubv4.NewClient(tc)
+
+		s := spinner.New(spinner.CharSets[9], 100*time.Millisecond)
+		fmt.Println("Getting stargazers...")
+		s.Start()
 
 		var allUsers []types.User
 		for {
@@ -80,7 +98,7 @@ func main() {
 						Login: v.Node.Login,
 					})
 				}
-				if v.Node.Email != "" {
+				if v.Node.Email != "" && *debugFlag {
 					fmt.Printf("%s (%s) - %s\n", v.Node.Name, v.Node.Login, v.Node.Email)
 				}
 			}
@@ -90,7 +108,10 @@ func main() {
 			variables["cursor"] = githubv4.NewString(query.Repository.Stargazers.PageInfo.EndCursor)
 		}
 
-		util.WriteToCSV(allUsers)
+		util.WriteToCSV(allUsers, *outputFlag)
+		s.Stop()
+		fmt.Println("Success.")
+		fmt.Printf("Wrote stargazer data to %s \n", *outputFlag)
 
 	} else {
 		fmt.Println("No Github token supplied. Either pass the -token flag, set up a .env file or set the GH_TOKEN environment variable.")
