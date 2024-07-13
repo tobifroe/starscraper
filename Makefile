@@ -26,6 +26,12 @@ build:
 	@echo "GOPATH=${GOPATH}"
 	go build -ldflags "-X github.com/tobifroe/starscraper/version.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X github.com/tobifroe/starscraper/version.BuildDate=${BUILD_DATE}" -o bin/${BIN_NAME}
 
+build-docker:
+	@echo "building ${BIN_NAME} ${VERSION}"
+	@echo "GOPATH=${GOPATH}"
+	go build -ldflags "-X github.com/tobifroe/starscraper/version.GitCommit=${GIT_COMMIT}${GIT_DIRTY} -X github.com/tobifroe/starscraper/version.BuildDate=${BUILD_DATE}" -o ${BIN_NAME}
+
+
 get-deps:
 	go mod download
 

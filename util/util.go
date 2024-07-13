@@ -27,18 +27,23 @@ func WriteToCSV(users []types.User, output string) {
 	defer writer.Flush()
 
 	headers := []string{"email", "name", "login"}
-	writer.Write(headers)
+	err = writer.Write(headers)
+	if err != nil {
+		panic(err)
+	}
 	for _, row := range users {
 		s := []string{
 			row.Email,
 			row.Name,
 			row.Login,
 		}
-		writer.Write(s)
+		err = writer.Write(s)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
 
-// TODO implement/document client secret parsing, Write to Docs mode
 func WriteToGoogleDocs(sheetFlag *string, allUsers []types.User) {
-	return
+	// TODO implement/document client secret parsing, Write to Docs mode
 }
