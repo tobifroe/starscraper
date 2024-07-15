@@ -38,7 +38,7 @@ func Scrape(token string, repo string, owner string, output string, verbose bool
 
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		fmt.Println("No .env file present.")
 	}
 
 	variables := map[string]interface{}{
