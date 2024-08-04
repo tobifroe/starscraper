@@ -6,7 +6,8 @@ require (
 	github.com/briandowns/spinner v1.23.1
 	github.com/joho/godotenv v1.5.1
 	github.com/shurcooL/githubv4 v0.0.0-20240429030203-be2daab69064
-	golang.org/x/oauth2 v0.21.0
+	github.com/spf13/cobra v1.8.1
+	golang.org/x/oauth2 v0.22.0
 	gopkg.in/Iwark/spreadsheet.v2 v2.0.0-20230915040305-7677e8164883
 )
 
@@ -19,7 +20,6 @@ require (
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/shurcooL/graphql v0.0.0-20230722043721-ed46e5a46466 // indirect
-	github.com/spf13/cobra v1.8.1 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/testify v1.8.4 // indirect
 	golang.org/x/net v0.19.0 // indirect
