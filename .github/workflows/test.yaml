@@ -25,3 +25,5 @@ jobs:
         go test -v -race -covermode atomic -coverprofile=covprofile ./...
     - name: Coveralls
       uses: coverallsapp/github-action@v2
+      with:
+        file: covprofile
