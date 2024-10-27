@@ -12,6 +12,8 @@ import (
 	"github.com/tobifroe/starscraper/types"
 )
 
+const outfile = "output.csv"
+
 func TestWriteToCSV(t *testing.T) {
 	// Mock data for testing
 	users := []types.User{
@@ -20,10 +22,10 @@ func TestWriteToCSV(t *testing.T) {
 	}
 
 	// Execute the function
-	WriteToCSV(users, "output.csv")
+	WriteToCSV(users, outfile)
 
 	// Read the written file
-	file, err := os.Open("output.csv")
+	file, err := os.Open(outfile)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -80,7 +82,7 @@ func TestMain(m *testing.M) {
 	exitVal := m.Run()
 
 	// Clean up after tests
-	err := os.Remove("output.csv")
+	err := os.Remove(outfile)
 	if err != nil {
 		panic(err)
 	}
