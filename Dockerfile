@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-RUN apk add make
+RUN apk --no-cache add make
 
 WORKDIR /app
 
