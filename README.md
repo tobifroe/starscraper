@@ -1,5 +1,8 @@
 # Starscraper
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tobifroe_tobifroe&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tobifroe_tobifroe)
+[![Coverage Status](https://coveralls.io/repos/github/tobifroe/starscraper/badge.svg?branch=main)](https://coveralls.io/github/tobifroe/starscraper?branch=main)
+
 Starscraper is a simple application that returns public information for the stargazers of a given Github repo.
 
 ## Installation
