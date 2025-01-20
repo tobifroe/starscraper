@@ -3,7 +3,7 @@ module github.com/tobifroe/starscraper
 go 1.22.2
 
 require (
-	github.com/briandowns/spinner v1.23.1
+	github.com/briandowns/spinner v1.23.2
 	github.com/golang/mock v1.6.0
 	github.com/joho/godotenv v1.5.1
 	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7
