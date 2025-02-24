@@ -1,6 +1,8 @@
 module github.com/tobifroe/starscraper
 
-go 1.22.2
+go 1.23.0
+
+toolchain go1.24.0
 
 require (
 	github.com/briandowns/spinner v1.23.2
@@ -9,7 +11,7 @@ require (
 	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	golang.org/x/oauth2 v0.25.0
+	golang.org/x/oauth2 v0.27.0
 )
 
 require (
