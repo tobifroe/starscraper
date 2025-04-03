@@ -35,7 +35,10 @@ func TestScrape(t *testing.T) {
 		// Run the function
 		Scrape("", "repo", "owner", output, false)
 
-		w.Close()
+		err = w.Close()
+		if err != nil {
+			t.Fail()	
+		}
 		out, _ := io.ReadAll(r)
 		os.Stdout = old
 

@@ -29,6 +29,7 @@ func TestWriteToCSV(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	//nolint:errcheck
 	defer file.Close()
 
 	reader := csv.NewReader(file)
