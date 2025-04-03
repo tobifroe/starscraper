@@ -21,6 +21,7 @@ func WriteToCSV(users []types.User, output string) {
 	if err != nil {
 		panic(err)
 	}
+	//nolint:errcheck
 	defer file.Close()
 
 	writer := csv.NewWriter(file)

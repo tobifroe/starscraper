@@ -21,7 +21,10 @@ func TestScrape(t *testing.T) {
 	}
 
 	t.Run("should fail if no token is provided", func(t *testing.T) {
-		os.Unsetenv("GH_TOKEN")
+		err = os.Unsetenv("GH_TOKEN")
+		if err != nil {
+			t.Fail()	
+		}
 		output := "output.csv"
 
 		// Capture the output
@@ -32,19 +35,13 @@ func TestScrape(t *testing.T) {
 		// Run the function
 		Scrape("", "repo", "owner", output, false)
 
-		w.Close()
+		err = w.Close()
+		if err != nil {
+			t.Fail()	
+		}
 		out, _ := io.ReadAll(r)
 		os.Stdout = old
 
 		assert.Contains(t, string(out), "No Github token supplied")
-	})
-
-	t.Run("should use token from environment if not provided", func(t *testing.T) {
-		// Set the environment variable for the token
-		os.Setenv("GH_TOKEN", "mocked-token")
-		defer os.Unsetenv("GH_TOKEN")
-
-		// Assert that token was used (in reality, would use more sophisticated validation)
-		assert.Equal(t, "mocked-token", os.Getenv("GH_TOKEN"))
 	})
 }
