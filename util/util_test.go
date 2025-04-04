@@ -8,7 +8,6 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/tobifroe/starscraper/types"
 )
 
@@ -68,14 +67,6 @@ func TestWriteToCSV(t *testing.T) {
 	if !matched {
 		t.Error("CSV format doesn't match the expected structure")
 	}
-}
-
-func TestContains(t *testing.T) {
-	matches := "foo"
-	noMatch := "bar"
-	testArray := []string{"foo", "foobizz", "buzz"}
-	assert.True(t, Contains(testArray, matches))
-	assert.False(t, Contains(testArray, noMatch))
 }
 
 func TestMain(m *testing.M) {

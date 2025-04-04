@@ -35,13 +35,12 @@ var query struct {
 }
 
 func Scrape(token string, repo string, owner string, output string, verbose bool) {
-
 	err := godotenv.Load()
 	if err != nil {
 		fmt.Println("No .env file present.")
 	}
 
-	variables := map[string]interface{}{
+	variables := map[string]any{
 		"repo":   githubv4.String(repo),
 		"owner":  githubv4.String(owner),
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
